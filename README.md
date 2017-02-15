@@ -83,9 +83,9 @@ accounts are needed.
    
 8. Change into the project directory and install dependencies with CocoaPods:
    
-```
-$ pod install
-```
+   ```
+   $ pod install
+   ```
    
    This should complete without warnings.
 
