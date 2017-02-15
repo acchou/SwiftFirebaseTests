@@ -82,11 +82,11 @@ accounts are needed.
    followed these directions, it should be `SwiftFirebaseTests`.
    
 8. Change into the project directory and install dependencies with CocoaPods:
-
+   
 ```
 $ pod install
 ```
-
+   
    This should complete without warnings.
 
 9. Return to Xcode. Build the workspace. It should build without errors.
