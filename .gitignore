@@ -1,0 +1,6 @@
+Pods/
+SwiftFirebaseTests.xcodeproj/xcuserdata
+SwiftFirebaseTests.xcworkspace/xcuserdata
+GoogleService-Info.plist
+debug.xcconfig
+
