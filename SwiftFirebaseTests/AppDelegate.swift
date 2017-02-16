@@ -7,12 +7,11 @@
 //
 
 import UIKit
-import FirebaseCore
-import FirebaseAuthUI
+import Firebase
 import GoogleSignIn
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
@@ -34,16 +33,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
             return true
         }
         return false
-    }
-
-    // TODO: 
-    // Continue following instructions at: https://firebase.google.com/docs/auth/ios/google-signin
-    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
-        <#code#>
-    }
-
-    func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
-        <#code#>
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
@@ -69,5 +58,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     }
 
 
+}
+
+extension AppDelegate: GIDSignInDelegate {
+    // TODO:
+    // Continue following instructions at: https://firebase.google.com/docs/auth/ios/google-signin
+    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+        if let error = error {
+            print("Error signing in: \(error.localizedDescription)")
+            return
+        }
+
+        guard let authentication = user.authentication else { return }
+        let credential = FIRGoogleAuthProvider.credential(
+            withIDToken: authentication.idToken,
+            accessToken: authentication.accessToken
+        )
+
+    }
+
+    func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
+        if let error = error {
+            print("Error disconnecting user: \(error.localizedDescription)")
+            return
+        }
+    }
 }
 

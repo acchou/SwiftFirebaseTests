@@ -18,7 +18,7 @@
 		1A8D92D11E50588F004FE6DF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1A8D92CF1E50588F004FE6DF /* GoogleService-Info.plist */; };
 		1A8D92D31E505B5A004FE6DF /* Firebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8D92D21E505B5A004FE6DF /* Firebase.swift */; };
 		1AC446B41E55259500F3E197 /* Gmail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AC446B31E55259500F3E197 /* Gmail.swift */; };
-		D1894CE79C7642921C636081 /* Pods_SwiftFirebaseTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D389FFBCA0B97738768C52E3 /* Pods_SwiftFirebaseTests.framework */; };
+		5FA950B20990F4A1B7C654C4 /* Pods_SwiftFirebaseTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21B13361FC9EAB0C62D10B06 /* Pods_SwiftFirebaseTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,7 +46,7 @@
 		1A8D92CF1E50588F004FE6DF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1A8D92D21E505B5A004FE6DF /* Firebase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Firebase.swift; sourceTree = "<group>"; };
 		1AC446B31E55259500F3E197 /* Gmail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gmail.swift; sourceTree = "<group>"; };
-		D389FFBCA0B97738768C52E3 /* Pods_SwiftFirebaseTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftFirebaseTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		21B13361FC9EAB0C62D10B06 /* Pods_SwiftFirebaseTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftFirebaseTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,7 +54,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D1894CE79C7642921C636081 /* Pods_SwiftFirebaseTests.framework in Frameworks */,
+				5FA950B20990F4A1B7C654C4 /* Pods_SwiftFirebaseTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -76,8 +76,8 @@
 				1A86BE161E4EF67B00F08109 /* SwiftFirebaseTests */,
 				1A86BE2B1E4EF67B00F08109 /* SwiftFirebaseTestsTests */,
 				1A86BE151E4EF67B00F08109 /* Products */,
-				23BF17DEBB09DA44C8DF0941 /* Pods */,
-				BD433045CE96030497ADA8C5 /* Frameworks */,
+				8A69C2C96195DF87B219328C /* Pods */,
+				DE5699F341C9923AFE593106 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -114,17 +114,17 @@
 			path = SwiftFirebaseTestsTests;
 			sourceTree = "<group>";
 		};
-		23BF17DEBB09DA44C8DF0941 /* Pods */ = {
+		8A69C2C96195DF87B219328C /* Pods */ = {
 			isa = PBXGroup;
 			children = (
 			);
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		BD433045CE96030497ADA8C5 /* Frameworks */ = {
+		DE5699F341C9923AFE593106 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				D389FFBCA0B97738768C52E3 /* Pods_SwiftFirebaseTests.framework */,
+				21B13361FC9EAB0C62D10B06 /* Pods_SwiftFirebaseTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -136,12 +136,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1A86BE311E4EF67B00F08109 /* Build configuration list for PBXNativeTarget "SwiftFirebaseTests" */;
 			buildPhases = (
-				BA409D631447C5B1EB7F9557 /* [CP] Check Pods Manifest.lock */,
+				B15316E4CE9477D3B46064F9 /* [CP] Check Pods Manifest.lock */,
 				1A86BE101E4EF67B00F08109 /* Sources */,
 				1A86BE111E4EF67B00F08109 /* Frameworks */,
 				1A86BE121E4EF67B00F08109 /* Resources */,
-				CC29E4AC98EDAF995F591188 /* [CP] Embed Pods Frameworks */,
-				A04760C51239CD704D858016 /* [CP] Copy Pods Resources */,
+				2D663B11C4F4FBE544443ADB /* [CP] Embed Pods Frameworks */,
+				00F75932974940FA92AF1A33 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -234,7 +234,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		A04760C51239CD704D858016 /* [CP] Copy Pods Resources */ = {
+		00F75932974940FA92AF1A33 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -249,22 +249,7 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SwiftFirebaseTests/Pods-SwiftFirebaseTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		BA409D631447C5B1EB7F9557 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		CC29E4AC98EDAF995F591188 /* [CP] Embed Pods Frameworks */ = {
+		2D663B11C4F4FBE544443ADB /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -277,6 +262,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SwiftFirebaseTests/Pods-SwiftFirebaseTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B15316E4CE9477D3B46064F9 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */

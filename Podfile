@@ -11,7 +11,6 @@ target 'SwiftFirebaseTests' do
   pod 'Firebase/Auth'
   pod 'Firebase/Crash'
   pod 'Firebase/Database'
-  pod 'FirebaseUI', '~> 1.0'
-  
-  pod 'GoogleAPIClientForREST/Gmail', '~> 1.1.1'
+  pod 'GoogleSignIn'
+  pod 'GoogleAPIClientForREST/Gmail'
 end

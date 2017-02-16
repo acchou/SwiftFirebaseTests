@@ -7,7 +7,6 @@
 //
 
 import GoogleAPIClientForREST
-import GTMOAuth2
 
 let gmailServiceScopes = [kGTLRAuthScopeGmailReadonly]
 let gmailService = GTLRGmailService()
