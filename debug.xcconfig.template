@@ -1,5 +1,7 @@
 #include "Pods/Target Support Files/Pods-SwiftFirebaseTests/Pods-SwiftFirebaseTests.debug.xcconfig"
 
+GOOGLE_CLIENT_ID = <<Value of CLIENT_ID from GoogleService-Info.plist>>
 GOOGLE_REVERSED_CLIENT_ID = <<Value of REVERSED_CLIENT_ID from GoogleService-Info.plist>>
 FACEBOOK_APP_ID = <<Value of Facebook App ID, digits only>>
 FACEBOOK_DISPLAY_NAME = <<Value of Facebook App display name>>
+GMAIL_TEST_ACCOUNT = <<Gmail account to use for testing purposes>>

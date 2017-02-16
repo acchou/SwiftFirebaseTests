@@ -77,6 +77,11 @@ PODS:
   - FirebaseUI/Twitter (1.0.0):
     - FirebaseUI/Auth
     - TwitterKit (~> 2.4)
+  - GoogleAPIClientForREST/Core (1.1.1):
+    - GTMSessionFetcher (>= 1.1.7)
+  - GoogleAPIClientForREST/Gmail (1.1.1):
+    - GoogleAPIClientForREST/Core
+    - GTMSessionFetcher (>= 1.1.7)
   - GoogleAppUtilities (1.1.2):
     - GoogleSymbolUtilities (~> 1.1)
   - GoogleInterchangeUtilities (1.2.2):
@@ -120,6 +125,7 @@ DEPENDENCIES:
   - Firebase/Crash
   - Firebase/Database
   - FirebaseUI (~> 1.0)
+  - GoogleAPIClientForREST/Gmail (~> 1.1.1)
 
 SPEC CHECKSUMS:
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
@@ -135,6 +141,7 @@ SPEC CHECKSUMS:
   FirebaseInstanceID: ba1e640935235e5fac39dfa816fe7660e72e1a8a
   FirebaseStorage: 5738284835edb57f0e81d4ae5832bb17c1e4b5fa
   FirebaseUI: 82bd64fc3fc5a9451c37a720aee813990e727cf1
+  GoogleAPIClientForREST: f272e35f7fe9f80ab232756c798adc32245ece8c
   GoogleAppUtilities: a8a552aa74f6597f805e45b5a3962766c3134973
   GoogleInterchangeUtilities: d5bc4d88d5b661ab72f9d70c58d02ca8c27ad1f7
   GoogleSignIn: a8694c0a8e6d1b0ec77c58014de5bfd4ba2fa766
@@ -146,6 +153,6 @@ SPEC CHECKSUMS:
   TwitterCore: e959987be23c767004d29eb7fab8d85d8585a2e5
   TwitterKit: f7b0a1adcb800f6446ff0ef70164797376522ff3
 
-PODFILE CHECKSUM: 905300e6ab0c7b73e542e2dd24859282e4909edf
+PODFILE CHECKSUM: 13b010b53708d1a8790f72b4f797de02cf0d2e98
 
 COCOAPODS: 1.1.1

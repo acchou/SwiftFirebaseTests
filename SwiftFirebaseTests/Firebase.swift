@@ -8,8 +8,9 @@
 
 import Firebase
 
-let FIRAppType = FIRApp.self
-let FIRAuthType = FIRAuth.self
+typealias FIRAppType = FIRApp
+typealias FIRAuthType = FIRAuth
+typealias FIRUserType = FIRUser
 
 let app: FIRApp = FIRApp.defaultApp()!
 let auth: FIRAuth = FIRAuth.auth()!

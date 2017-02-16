@@ -20,8 +20,26 @@ class SwiftFirebaseTestsTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
     }
-    
-    func testExample() {
+
+    func createUser(withEmail email: String, password: String) {
+        auth.createUser(withEmail: email, password: password) { (user, error) in
+            XCTAssertNil(error)
+            XCTAssertNotNil(user)
+            XCTAssertEqual(user?.email, email)
+        }
+    }
+
+    func signIn(withEmail email: String, password: String) {
+        auth.signIn(withEmail: email, password: password) { (user, error) in
+            XCTAssertNil(error)
+            XCTAssertNotNil(user)
+            XCTAssertEqual(user?.email, email)
+        }
+    }
+
+    func testAuthLogin() {
+        var user: FIRUserType
+        createUser(withEmail: "", password: "")
         auth.addStateDidChangeListener { auth, user in
             if let user = user {
                 print("Logged in user \(user)")
@@ -29,7 +47,6 @@ class SwiftFirebaseTestsTests: XCTestCase {
                 print("Logged out")
             }
         }
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
     }
     
     func testPerformanceExample() {

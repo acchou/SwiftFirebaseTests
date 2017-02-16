@@ -17,7 +17,8 @@
 		1A8D92D01E50588F004FE6DF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1A8D92CF1E50588F004FE6DF /* GoogleService-Info.plist */; };
 		1A8D92D11E50588F004FE6DF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1A8D92CF1E50588F004FE6DF /* GoogleService-Info.plist */; };
 		1A8D92D31E505B5A004FE6DF /* Firebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8D92D21E505B5A004FE6DF /* Firebase.swift */; };
-		7032A328C4C1DA301044B054 /* Pods_SwiftFirebaseTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCC1F33641F57A63DF8DBF3E /* Pods_SwiftFirebaseTests.framework */; };
+		1AC446B41E55259500F3E197 /* Gmail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AC446B31E55259500F3E197 /* Gmail.swift */; };
+		D1894CE79C7642921C636081 /* Pods_SwiftFirebaseTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D389FFBCA0B97738768C52E3 /* Pods_SwiftFirebaseTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,7 +45,8 @@
 		1A86BE2E1E4EF67B00F08109 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1A8D92CF1E50588F004FE6DF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1A8D92D21E505B5A004FE6DF /* Firebase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Firebase.swift; sourceTree = "<group>"; };
-		DCC1F33641F57A63DF8DBF3E /* Pods_SwiftFirebaseTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftFirebaseTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1AC446B31E55259500F3E197 /* Gmail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gmail.swift; sourceTree = "<group>"; };
+		D389FFBCA0B97738768C52E3 /* Pods_SwiftFirebaseTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftFirebaseTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,7 +54,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7032A328C4C1DA301044B054 /* Pods_SwiftFirebaseTests.framework in Frameworks */,
+				D1894CE79C7642921C636081 /* Pods_SwiftFirebaseTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -74,8 +76,8 @@
 				1A86BE161E4EF67B00F08109 /* SwiftFirebaseTests */,
 				1A86BE2B1E4EF67B00F08109 /* SwiftFirebaseTestsTests */,
 				1A86BE151E4EF67B00F08109 /* Products */,
-				7AFF90DC753C3DE3F01C015A /* Pods */,
-				F577B031C0531CD01F0C5C55 /* Frameworks */,
+				23BF17DEBB09DA44C8DF0941 /* Pods */,
+				BD433045CE96030497ADA8C5 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -93,6 +95,7 @@
 			children = (
 				1A86BE171E4EF67B00F08109 /* AppDelegate.swift */,
 				1A8D92D21E505B5A004FE6DF /* Firebase.swift */,
+				1AC446B31E55259500F3E197 /* Gmail.swift */,
 				1A86BE191E4EF67B00F08109 /* ViewController.swift */,
 				1A86BE1B1E4EF67B00F08109 /* Main.storyboard */,
 				1A86BE1E1E4EF67B00F08109 /* Assets.xcassets */,
@@ -111,17 +114,17 @@
 			path = SwiftFirebaseTestsTests;
 			sourceTree = "<group>";
 		};
-		7AFF90DC753C3DE3F01C015A /* Pods */ = {
+		23BF17DEBB09DA44C8DF0941 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
 			);
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		F577B031C0531CD01F0C5C55 /* Frameworks */ = {
+		BD433045CE96030497ADA8C5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				DCC1F33641F57A63DF8DBF3E /* Pods_SwiftFirebaseTests.framework */,
+				D389FFBCA0B97738768C52E3 /* Pods_SwiftFirebaseTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -133,12 +136,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1A86BE311E4EF67B00F08109 /* Build configuration list for PBXNativeTarget "SwiftFirebaseTests" */;
 			buildPhases = (
-				B8F9BB6C507A6AC90A32AF11 /* [CP] Check Pods Manifest.lock */,
+				BA409D631447C5B1EB7F9557 /* [CP] Check Pods Manifest.lock */,
 				1A86BE101E4EF67B00F08109 /* Sources */,
 				1A86BE111E4EF67B00F08109 /* Frameworks */,
 				1A86BE121E4EF67B00F08109 /* Resources */,
-				B9F193510E24C29ABF0FDD0A /* [CP] Embed Pods Frameworks */,
-				7FCCC2B6813C28B0758945D4 /* [CP] Copy Pods Resources */,
+				CC29E4AC98EDAF995F591188 /* [CP] Embed Pods Frameworks */,
+				A04760C51239CD704D858016 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -231,7 +234,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		7FCCC2B6813C28B0758945D4 /* [CP] Copy Pods Resources */ = {
+		A04760C51239CD704D858016 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -246,7 +249,7 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SwiftFirebaseTests/Pods-SwiftFirebaseTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		B8F9BB6C507A6AC90A32AF11 /* [CP] Check Pods Manifest.lock */ = {
+		BA409D631447C5B1EB7F9557 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -261,7 +264,7 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		B9F193510E24C29ABF0FDD0A /* [CP] Embed Pods Frameworks */ = {
+		CC29E4AC98EDAF995F591188 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -283,6 +286,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1AC446B41E55259500F3E197 /* Gmail.swift in Sources */,
 				1A8D92D31E505B5A004FE6DF /* Firebase.swift in Sources */,
 				1A86BE1A1E4EF67B00F08109 /* ViewController.swift in Sources */,
 				1A86BE181E4EF67B00F08109 /* AppDelegate.swift in Sources */,
