@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1A33E0D01E56B63B00F3711C /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A33E0CF1E56B63B00F3711C /* ViewModel.swift */; };
 		1A63AC6B1E52619400658698 /* debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 1A63AC6A1E52619400658698 /* debug.xcconfig */; };
 		1A86BE181E4EF67B00F08109 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A86BE171E4EF67B00F08109 /* AppDelegate.swift */; };
 		1A86BE1A1E4EF67B00F08109 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A86BE191E4EF67B00F08109 /* ViewController.swift */; };
@@ -32,6 +33,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1A33E0CF1E56B63B00F3711C /* ViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		1A63AC6A1E52619400658698 /* debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = debug.xcconfig; sourceTree = "<group>"; };
 		1A86BE141E4EF67B00F08109 /* SwiftFirebaseTests.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftFirebaseTests.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A86BE171E4EF67B00F08109 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -97,6 +99,7 @@
 				1A8D92D21E505B5A004FE6DF /* Firebase.swift */,
 				1AC446B31E55259500F3E197 /* Gmail.swift */,
 				1A86BE191E4EF67B00F08109 /* ViewController.swift */,
+				1A33E0CF1E56B63B00F3711C /* ViewModel.swift */,
 				1A86BE1B1E4EF67B00F08109 /* Main.storyboard */,
 				1A86BE1E1E4EF67B00F08109 /* Assets.xcassets */,
 				1A86BE201E4EF67B00F08109 /* LaunchScreen.storyboard */,
@@ -286,6 +289,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1A33E0D01E56B63B00F3711C /* ViewModel.swift in Sources */,
 				1AC446B41E55259500F3E197 /* Gmail.swift in Sources */,
 				1A8D92D31E505B5A004FE6DF /* Firebase.swift in Sources */,
 				1A86BE1A1E4EF67B00F08109 /* ViewController.swift in Sources */,

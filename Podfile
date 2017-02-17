@@ -13,4 +13,6 @@ target 'SwiftFirebaseTests' do
   pod 'Firebase/Database'
   pod 'GoogleSignIn'
   pod 'GoogleAPIClientForREST/Gmail'
+  pod 'RxSwift', '~> 3.2'
+  pod 'RxCocoa', '~> 3.2'
 end

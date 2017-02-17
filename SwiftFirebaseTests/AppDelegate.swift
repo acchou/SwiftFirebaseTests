@@ -9,11 +9,14 @@
 import UIKit
 import Firebase
 import GoogleSignIn
+import RxSwift
+import RxCocoa
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    public var authEvents = PublishSubject<AuthEvent>()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -25,10 +28,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any]) -> Bool {
         let sourceApplication = options[UIApplicationOpenURLOptionsKey.sourceApplication] as! String?
-//        if FUIAuth.defaultAuthUI()?.handleOpen(url, sourceApplication: sourceApplication) ?? false {
-//            return true
-//        }
-
         if GIDSignIn.sharedInstance().handle(url, sourceApplication: sourceApplication, annotation: [:]) {
             return true
         }
@@ -64,6 +63,9 @@ extension AppDelegate: GIDSignInDelegate {
     // TODO:
     // Continue following instructions at: https://firebase.google.com/docs/auth/ios/google-signin
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+        let event = AuthEvent.googleSignIn(signIn: signIn, user: user, error: error)
+        print("signin: \(event)")
+        authEvents.onNext(event)
         if let error = error {
             print("Error signing in: \(error.localizedDescription)")
             return
@@ -78,6 +80,9 @@ extension AppDelegate: GIDSignInDelegate {
     }
 
     func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
+        let event = AuthEvent.googleSignOut(signIn: signIn, user: user, error: error)
+        print("signout: \(event)")
+        authEvents.onNext(event)
         if let error = error {
             print("Error disconnecting user: \(error.localizedDescription)")
             return
