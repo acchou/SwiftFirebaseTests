@@ -8,22 +8,34 @@
 
 import RxSwift
 import GoogleSignIn
+import FirebaseAuth
 
 enum AuthEvent {
     case googleSignIn(signIn: GIDSignIn?, user: GIDGoogleUser?, error: Error?)
     case googleSignOut(signIn: GIDSignIn?, user: GIDGoogleUser?, error: Error?)
+    case firebaseSignIn(user: FIRUser?, error: Error?)
 }
 
 extension AuthEvent: CustomStringConvertible {
     var description: String {
         switch self {
-        case let .googleSignIn(signIn, user, error):
+        case let .googleSignIn(_, user, error):
+            if let error = error { return error.localizedDescription }
             let name = user?.profile.name
             return "Google signin \(name)"
-        case let .googleSignOut(signIn, user, error):
+        case let .googleSignOut(_, user, error):
+            if let error = error { return error.localizedDescription }
             let name = user?.profile.name
             return "Google signout \(name)"
+        case let .firebaseSignIn(user, error):
+            if let error = error { return error.localizedDescription }
+            let name = user?.displayName
+            return "Firebase signin \(name)"
         }
+    }
+
+    var isFirebaseSignIn: Bool {
+        if case .firebaseSignIn(_, _) = self { return true } else { return false }
     }
 }
 
@@ -41,7 +53,21 @@ typealias ViewModelType = (ViewModelInputs) -> ViewModelOutputs
 func ViewModel() -> ViewModelType {
     return { inputs in
         let message = Observable.just("Sign in to a test Google account to enable the testsuite.")
-        let status = inputs.authEvents.map { String(describing: $0) }
+        let eventStatus = inputs.authEvents.map { String(describing: $0) }
+
+        let gmailStatus = inputs.authEvents
+            .filter { $0.isFirebaseSignIn }
+            .flatMapLatest { _ in
+                getGmailLabels()
+            }
+            .map {
+                $0.map { "\($0.name):\($0.messagesUnread)/\($0.messagesTotal)" }.joined(separator: " ")
+            }
+
+        let status = Observable.of(eventStatus, gmailStatus)
+            .merge()
+            .shareReplay(1)
+
         return ViewModelOutputs(message: message, status: status)
     }
 }

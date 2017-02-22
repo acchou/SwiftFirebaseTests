@@ -11,6 +11,7 @@ import Firebase
 import GoogleSignIn
 import RxSwift
 import RxCocoa
+import GTMSessionFetcher
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -21,8 +22,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         FIRApp.configure()
-        GIDSignIn.sharedInstance().clientID = FIRApp.defaultApp()?.options.clientID
-        GIDSignIn.sharedInstance().delegate = self
+        let signIn = GIDSignIn.sharedInstance()!
+        signIn.clientID = FIRApp.defaultApp()?.options.clientID
+        signIn.delegate = self
+
+        // Request access to Gmail API.
+        let scopes: NSArray = signIn.scopes as NSArray? ?? []
+        signIn.scopes = scopes.addingObjects(from: gmailServiceScopes)
+        gmailService.isRetryEnabled = true
+        gmailService.maxRetryInterval = 20
+
+        // Log all Google API requests. Location of log file is printed to console.
+        GTMSessionFetcher.setLoggingEnabled(true)
         return true
     }
 
@@ -55,8 +66,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-
-
 }
 
 extension AppDelegate: GIDSignInDelegate {
@@ -77,6 +86,15 @@ extension AppDelegate: GIDSignInDelegate {
             accessToken: authentication.accessToken
         )
 
+        auth.signIn(with: credential) { (user, error) in
+            self.authEvents.onNext(.firebaseSignIn(user: user, error: error))
+            if let error = error {
+                print("Error with firebase signin: \(error)")
+            }
+        }
+
+        gmailService.authorizer = user.authentication.fetcherAuthorizer()
+        assert(gmailService.authorizer?.canAuthorize == true)
     }
 
     func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
@@ -89,4 +107,3 @@ extension AppDelegate: GIDSignInDelegate {
         }
     }
 }
-
