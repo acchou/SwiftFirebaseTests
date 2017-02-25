@@ -39,23 +39,28 @@ extension AuthEvent: CustomStringConvertible {
     }
 }
 
-struct ViewModelInputs {
-    var authEvents: Observable<AuthEvent>
+protocol ViewModelType {
+    associatedtype Input
+    associatedtype Output
+
+    func transform(_ input: Input) -> Output
 }
 
-struct ViewModelOutputs {
-    var message: Observable<String>
-    var status: Observable<String>
-}
+class ViewModel: ViewModelType {
+    struct Input {
+        var authEvents: Observable<AuthEvent>
+    }
 
-typealias ViewModelType = (ViewModelInputs) -> ViewModelOutputs
+    struct Output {
+        var message: Observable<String>
+        var status: Observable<String>
+    }
 
-func ViewModel() -> ViewModelType {
-    return { inputs in
+    func transform(_ input: Input) -> Output {
         let message = Observable.just("Sign in to a test Google account to enable the testsuite.")
-        let eventStatus = inputs.authEvents.map { String(describing: $0) }
+        let eventStatus = input.authEvents.map { String(describing: $0) }
 
-        let gmailStatus = inputs.authEvents
+        let gmailStatus = input.authEvents
             .filter { $0.isFirebaseSignIn }
             .flatMapLatest { _ in
                 getGmailLabels()
@@ -67,7 +72,7 @@ func ViewModel() -> ViewModelType {
         let status = Observable.of(eventStatus, gmailStatus)
             .merge()
             .shareReplay(1)
-
-        return ViewModelOutputs(message: message, status: status)
+            
+        return Output(message: message, status: status)
     }
 }

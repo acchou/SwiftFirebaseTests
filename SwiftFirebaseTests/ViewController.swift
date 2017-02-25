@@ -26,16 +26,16 @@ class ViewController: UIViewController, GIDSignInUIDelegate {
 
         googleSignInButton.style = .wide
         let viewModel = ViewModel()
-        let inputs = ViewModelInputs(
+        let input = ViewModel.Input(
             authEvents: (UIApplication.shared.delegate as! AppDelegate).authEvents.debug("Auth event")
         )
-        let outputs = viewModel(inputs)
+        let output = viewModel.transform(input)
 
-        outputs.message
+        output.message
             .bindTo(messageLabel.rx.text)
             .addDisposableTo(disposeBag)
 
-        outputs.status
+        output.status
             .bindTo(statusLabel.rx.text)
             .addDisposableTo(disposeBag)
     }
