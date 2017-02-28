@@ -28,9 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         // Request access to Gmail API.
         let scopes: NSArray = signIn.scopes as NSArray? ?? []
-        signIn.scopes = scopes.addingObjects(from: gmailServiceScopes)
-        gmailService.isRetryEnabled = true
-        gmailService.maxRetryInterval = 20
+        signIn.scopes = scopes.addingObjects(from: global.rxGmail.serviceScopes)
 
         // Log all Google API requests. Location of log file is printed to console.
         GTMSessionFetcher.setLoggingEnabled(true)
@@ -93,8 +91,8 @@ extension AppDelegate: GIDSignInDelegate {
             }
         }
 
-        gmailService.authorizer = user.authentication.fetcherAuthorizer()
-        assert(gmailService.authorizer?.canAuthorize == true)
+        global.gmailService.authorizer = user.authentication.fetcherAuthorizer()
+        assert(global.gmailService.authorizer?.canAuthorize == true)
     }
 
     func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {

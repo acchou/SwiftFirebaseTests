@@ -18,7 +18,8 @@
 		1A8D92D01E50588F004FE6DF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1A8D92CF1E50588F004FE6DF /* GoogleService-Info.plist */; };
 		1A8D92D11E50588F004FE6DF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1A8D92CF1E50588F004FE6DF /* GoogleService-Info.plist */; };
 		1A8D92D31E505B5A004FE6DF /* Firebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8D92D21E505B5A004FE6DF /* Firebase.swift */; };
-		1AC446B41E55259500F3E197 /* Gmail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AC446B31E55259500F3E197 /* Gmail.swift */; };
+		1A98C2C51E65095C00017D74 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A98C2C41E65095C00017D74 /* Global.swift */; };
+		1A98C2C71E650C8C00017D74 /* RxGmail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A98C2C61E650C8C00017D74 /* RxGmail.swift */; };
 		5FA950B20990F4A1B7C654C4 /* Pods_SwiftFirebaseTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21B13361FC9EAB0C62D10B06 /* Pods_SwiftFirebaseTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -47,7 +48,8 @@
 		1A86BE2E1E4EF67B00F08109 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1A8D92CF1E50588F004FE6DF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1A8D92D21E505B5A004FE6DF /* Firebase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Firebase.swift; sourceTree = "<group>"; };
-		1AC446B31E55259500F3E197 /* Gmail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gmail.swift; sourceTree = "<group>"; };
+		1A98C2C41E65095C00017D74 /* Global.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
+		1A98C2C61E650C8C00017D74 /* RxGmail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxGmail.swift; sourceTree = "<group>"; };
 		21B13361FC9EAB0C62D10B06 /* Pods_SwiftFirebaseTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftFirebaseTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -97,7 +99,8 @@
 			children = (
 				1A86BE171E4EF67B00F08109 /* AppDelegate.swift */,
 				1A8D92D21E505B5A004FE6DF /* Firebase.swift */,
-				1AC446B31E55259500F3E197 /* Gmail.swift */,
+				1A98C2C41E65095C00017D74 /* Global.swift */,
+				1A98C2C61E650C8C00017D74 /* RxGmail.swift */,
 				1A86BE191E4EF67B00F08109 /* ViewController.swift */,
 				1A33E0CF1E56B63B00F3711C /* ViewModel.swift */,
 				1A86BE1B1E4EF67B00F08109 /* Main.storyboard */,
@@ -290,10 +293,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				1A33E0D01E56B63B00F3711C /* ViewModel.swift in Sources */,
-				1AC446B41E55259500F3E197 /* Gmail.swift in Sources */,
+				1A98C2C51E65095C00017D74 /* Global.swift in Sources */,
 				1A8D92D31E505B5A004FE6DF /* Firebase.swift in Sources */,
 				1A86BE1A1E4EF67B00F08109 /* ViewController.swift in Sources */,
 				1A86BE181E4EF67B00F08109 /* AppDelegate.swift in Sources */,
+				1A98C2C71E650C8C00017D74 /* RxGmail.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
