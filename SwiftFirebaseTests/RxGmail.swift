@@ -10,6 +10,18 @@ import GoogleAPIClientForREST
 import RxSwift
 import RxSwiftExt
 
+// Protocols used to retroactively model all paged query types in the Gmail API.
+protocol PagedQuery: NSCopying, RxGmail.Query {
+    var pageToken: String? { get set }
+}
+
+protocol PagedResult {
+    var nextPageToken: String? { get }
+}
+
+extension RxGmail.MessageResponse: PagedResult { }
+extension RxGmail.MessageQuery: PagedQuery { }
+
 class RxGmail {
     let GoogleClientID: String
 
@@ -44,6 +56,7 @@ class RxGmail {
     typealias DraftsGetQuery = GTLRGmailQuery_UsersDraftsGet
     typealias DraftsListQuery = GTLRGmailQuery_UsersDraftsList
     typealias DraftsListResponse = GTLRGmail_ListDraftsResponse
+    typealias GmailCollection = GTLRCollectionObject
 
     fileprivate func createRequest(observer: AnyObserver<Any?>, query: Query) -> ServiceTicket {
         let serviceTicket = service.executeQuery(query) { ticket, object, error in
@@ -80,12 +93,38 @@ class RxGmail {
 
     // Each event returns a page of messages.
     // TODO: Generalize to arbitrary query. Need to copy queries each time they are executed.
-    func getMessages(forUserId userId: String = "me") -> Observable<[Message]> {
+    func getMessages(forUserId userId: String = "me") -> Observable<MessageResponse> {
         let query = MessageQuery.query(withUserId: userId)
         return getMessages(query: query)
     }
 
-    func getMessages(query: MessageQuery) -> Observable<[Message]> {
+    // TODO: Refactor to use extensions on the collection and query, then constraint the parameters to these protocols.
+    func loadPages<C: PagedResult, Q: PagedQuery> (query: Q) -> Observable<C> {
+        func getRemainingPages(after previousPage: C?) -> Observable<C> {
+            let nextPageToken = previousPage?.nextPageToken
+            if previousPage != nil && nextPageToken == nil {
+                return .empty()
+            }
+            let query = query.copy() as! Q
+            query.pageToken = nextPageToken
+            return execute(query: query)
+                .map { $0! as! C }
+                .flatMap { page -> Observable<C> in
+                    let first = Observable.just(page)
+                    let rest = getRemainingPages(after: page)
+                    return first.concat(rest)
+                }
+        }
+        return getRemainingPages(after: nil)
+    }
+
+    // TODO: Replace getMessages with this generic implementation.
+    func getMessages2(query: MessageQuery) -> Observable<MessageResponse> {
+        return loadPages(query: query)
+    }
+
+    // TODO: Remove.
+    func getMessages(query: MessageQuery) -> Observable<MessageResponse> {
         func getRemainingMessages(after previousPage: MessageResponse?) -> Observable<MessageResponse> {
             let nextPageToken = previousPage?.nextPageToken
             if previousPage != nil && nextPageToken == nil {
@@ -102,8 +141,6 @@ class RxGmail {
                 }
         }
         return getRemainingMessages(after: nil)
-            .map { $0.messages }
-            .unwrap()
     }
 
     func getProfile(forUserId userId: String = "me") -> Observable<Profile> {
