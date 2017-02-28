@@ -15,4 +15,5 @@ target 'SwiftFirebaseTests' do
   pod 'GoogleAPIClientForREST/Gmail'
   pod 'RxSwift', '~> 3.2'
   pod 'RxCocoa', '~> 3.2'
+  pod 'RxSwiftExt', '~> 2.1'
 end
