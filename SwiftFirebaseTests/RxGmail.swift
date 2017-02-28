@@ -39,6 +39,11 @@ class RxGmail {
     typealias StopQuery = GTLRGmailQuery_UsersStop
     typealias DraftsCreateQuery = GTLRGmailQuery_UsersDraftsCreate
     typealias Draft = GTLRGmail_Draft
+    typealias UploadParameters = GTLRUploadParameters
+    typealias DraftsDeleteQuery = GTLRGmailQuery_UsersDraftsDelete
+    typealias DraftsGetQuery = GTLRGmailQuery_UsersDraftsGet
+    typealias DraftsListQuery = GTLRGmailQuery_UsersDraftsList
+    typealias DraftsListResponse = GTLRGmail_ListDraftsResponse
 
     fileprivate func createRequest(observer: AnyObserver<Any?>, query: Query) -> ServiceTicket {
         let serviceTicket = service.executeQuery(query) { ticket, object, error in
@@ -119,6 +124,36 @@ class RxGmail {
             .map { _ in () }
     }
 
-    // TODO: More Gmail APIs...
-    
+    // MARK: - Drafts
+
+    func createDraft(draft: Draft, uploadParameters: UploadParameters?,forUserId userId: String = "me") -> Observable<Draft> {
+        let query = DraftsCreateQuery.query(withObject: draft, userId: userId, uploadParameters: uploadParameters)
+        return execute(query: query)
+            .map { $0! as! Draft }
+    }
+
+    func deleteDraft(draftID: String, forUserId userId: String = "me") -> Observable<Void> {
+        let query = DraftsDeleteQuery.query(withUserId: userId, identifier: draftID)
+        return execute(query: query)
+            .map { _ in () }
+    }
+
+    func getDraft(draftID: String, format: String? = nil, forUserId userId: String = "me") -> Observable<Draft> {
+        let query = DraftsGetQuery.query(withUserId: userId, identifier: draftID)
+        query.format = format
+        return execute(query: query)
+            .map { $0! as! Draft }
+    }
+
+    // TODO: These are paged APIs.
+
+//    func listDrafts(forUserId userId: String = "me") {
+//        let query = DraftsListQuery.query(withUserId: userId)
+//        return listDrafts(query: query)
+//    }
+//
+//    func listDrafts(query: DraftsListQuery) {
+//        return execute(query: query)
+//            .map { $0! as! DraftsListResponse }
+//    }
 }
