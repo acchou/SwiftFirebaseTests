@@ -48,8 +48,14 @@ class RxGmail {
     typealias GmailService = GTLRGmailService
     typealias Query = GTLRQueryProtocol
     typealias Response = GTLRObject
+    typealias ServiceTicket = GTLRServiceTicket
+    typealias UploadParameters = GTLRUploadParameters
+
+    typealias ErrorObject = GTLRErrorObject
+    typealias ErrorObjectDetail = GTLRErrorObjectDetail
+    typealias ErrorObjectItem = GTLRErrorObjectErrorItem
+
     typealias Label = GTLRGmail_Label
-    typealias Message = GTLRGmail_Message
     typealias LabelsListQuery = GTLRGmailQuery_UsersLabelsList
     typealias LabelsListResponse = GTLRGmail_ListLabelsResponse
     typealias LabelsCreateQuery = GTLRGmailQuery_UsersLabelsCreate
@@ -57,6 +63,11 @@ class RxGmail {
     typealias LabelsGetQuery = GTLRGmailQuery_UsersLabelsGet
     typealias LabelsPatchQuery = GTLRGmailQuery_UsersLabelsPatch
     typealias LabelsUpdateQuery = GTLRGmailQuery_UsersLabelsUpdate
+
+    typealias Message = GTLRGmail_Message
+    typealias MessagePartBody = GTLRGmail_MessagePartBody
+    typealias MessagePart = GTLRGmail_MessagePart
+    typealias MessagePartHeader = GTLRGmail_MessagePartHeader
     typealias MessageListQuery = GTLRGmailQuery_UsersMessagesList
     typealias MessageListResponse = GTLRGmail_ListMessagesResponse
     typealias MessageBatchDeleteQuery = GTLRGmailQuery_UsersMessagesBatchDelete
@@ -72,28 +83,28 @@ class RxGmail {
     typealias MessageSendQuery = GTLRGmailQuery_UsersMessagesSend
     typealias MessageTrashQuery = GTLRGmailQuery_UsersMessagesTrash
     typealias MessageUntrashQuery = GTLRGmailQuery_UsersMessagesUntrash
-    typealias ServiceTicket = GTLRServiceTicket
-    typealias ProfileQuery = GTLRGmailQuery_UsersGetProfile
+    typealias MessageAttachmentQuery = GTLRGmailQuery_UsersMessagesAttachmentsGet
+
     typealias Profile = GTLRGmail_Profile
+    typealias ProfileQuery = GTLRGmailQuery_UsersGetProfile
+
     typealias WatchRequest = GTLRGmail_WatchRequest
     typealias WatchResponse = GTLRGmail_WatchResponse
-    typealias WatchQuery = GTLRGmailQuery_UsersWatch
-    typealias StopQuery = GTLRGmailQuery_UsersStop
-    typealias DraftsCreateQuery = GTLRGmailQuery_UsersDraftsCreate
+    typealias WatchStartQuery = GTLRGmailQuery_UsersWatch
+    typealias WatchStopQuery = GTLRGmailQuery_UsersStop
+
     typealias Draft = GTLRGmail_Draft
-    typealias UploadParameters = GTLRUploadParameters
+    typealias DraftsCreateQuery = GTLRGmailQuery_UsersDraftsCreate
     typealias DraftsDeleteQuery = GTLRGmailQuery_UsersDraftsDelete
     typealias DraftsGetQuery = GTLRGmailQuery_UsersDraftsGet
     typealias DraftsListQuery = GTLRGmailQuery_UsersDraftsList
     typealias DraftsListResponse = GTLRGmail_ListDraftsResponse
     typealias DraftsSendQuery = GTLRGmailQuery_UsersDraftsSend
     typealias DraftsUpdateQuery = GTLRGmailQuery_UsersDraftsUpdate
+
     typealias HistoryQuery = GTLRGmailQuery_UsersHistoryList
     typealias HistoryResponse = GTLRGmail_ListHistoryResponse
-    typealias AttachmentQuery = GTLRGmailQuery_UsersMessagesAttachmentsGet
-    typealias MessagePartBody = GTLRGmail_MessagePartBody
-    typealias MessagePart = GTLRGmail_MessagePart
-    typealias MessagePartHeader = GTLRGmail_MessagePartHeader
+
     typealias SettingsAutoForwardingQuery = GTLRGmailQuery_UsersSettingsGetAutoForwarding
     typealias SettingsAutoForwarding = GTLRGmail_AutoForwarding
     typealias SettingsAutoForwardingUpdateQuery = GTLRGmailQuery_UsersSettingsUpdateAutoForwarding
@@ -106,18 +117,21 @@ class RxGmail {
     typealias SettingsVacationQuery = GTLRGmailQuery_UsersSettingsGetVacation
     typealias SettingsVacationUpdateQuery = GTLRGmailQuery_UsersSettingsUpdateVacation
     typealias SettingsVacation = GTLRGmail_VacationSettings
+
     typealias FilterCreateQuery = GTLRGmailQuery_UsersSettingsFiltersCreate
     typealias Filter = GTLRGmail_Filter
     typealias FilterGetQuery = GTLRGmailQuery_UsersSettingsFiltersGet
     typealias FilterDeleteQuery = GTLRGmailQuery_UsersSettingsFiltersDelete
     typealias FilterListQuery = GTLRGmailQuery_UsersSettingsFiltersList
     typealias FilterListResponse = GTLRGmail_ListFiltersResponse
+
     typealias ForwardingAddress = GTLRGmail_ForwardingAddress
     typealias ForwardingAddressGetQuery = GTLRGmailQuery_UsersSettingsForwardingAddressesGet
     typealias ForwardingAddressDeleteQuery = GTLRGmailQuery_UsersSettingsForwardingAddressesDelete
     typealias ForwardingAddressCreateQuery = GTLRGmailQuery_UsersSettingsForwardingAddressesCreate
-    typealias ForwardingAddressesListQuery = GTLRGmailQuery_UsersSettingsForwardingAddressesList
-    typealias ForwardingAddressesListResponse = GTLRGmail_ListForwardingAddressesResponse
+    typealias ForwardingAddressListQuery = GTLRGmailQuery_UsersSettingsForwardingAddressesList
+    typealias ForwardingAddressListResponse = GTLRGmail_ListForwardingAddressesResponse
+
     typealias SendAsAlias = GTLRGmail_SendAs
     typealias SendAsListResponse = GTLRGmail_ListSendAsResponse
     typealias SendAsGetQuery = GTLRGmailQuery_UsersSettingsSendAsGet
@@ -220,20 +234,20 @@ class RxGmail {
     }
 
     func watchRequest(request: WatchRequest, forUserId userId: String = "me") -> Observable<WatchResponse> {
-        let query = WatchQuery.query(withObject: request, userId: userId)
+        let query = WatchStartQuery.query(withObject: request, userId: userId)
         return watchRequest(query: query)
     }
 
-    func watchRequest(query: WatchQuery) -> Observable<WatchResponse> {
+    func watchRequest(query: WatchStartQuery) -> Observable<WatchResponse> {
         return execute(query: query)
     }
 
     func stopNotifications(forUserId userId: String = "me") -> Observable<Void> {
-        let query = StopQuery.query(withUserId: userId)
+        let query = WatchStopQuery.query(withUserId: userId)
         return stopNotifications(query: query)
     }
 
-    func stopNotifications(query: StopQuery) -> Observable<Void> {
+    func stopNotifications(query: WatchStopQuery) -> Observable<Void> {
         return execute(query: query)
     }
 
@@ -466,11 +480,11 @@ class RxGmail {
 
     // MARK: - Attachments
     func getAttachments(messageId: String, attachmentId: String, forUserId userId: String = "me") ->  Observable<MessagePartBody> {
-        let query = AttachmentQuery.query(withUserId: userId, messageId: messageId, identifier: attachmentId)
+        let query = MessageAttachmentQuery.query(withUserId: userId, messageId: messageId, identifier: attachmentId)
         return getAttachments(query: query)
     }
 
-    func getAttachments(query: AttachmentQuery) -> Observable<MessagePartBody> {
+    func getAttachments(query: MessageAttachmentQuery) -> Observable<MessagePartBody> {
         return execute(query: query)
     }
 
@@ -587,12 +601,12 @@ class RxGmail {
 
     // MARK: - Forward addresses
 
-    func listForwardingAddresses(forUserId userId: String = "me") -> Observable<ForwardingAddressesListResponse> {
-        let query = ForwardingAddressesListQuery.query(withUserId: userId)
+    func listForwardingAddresses(forUserId userId: String = "me") -> Observable<ForwardingAddressListResponse> {
+        let query = ForwardingAddressListQuery.query(withUserId: userId)
         return listForwardingAddresses(query: query)
     }
 
-    func listForwardingAddresses(query: ForwardingAddressesListQuery) -> Observable<ForwardingAddressesListResponse> {
+    func listForwardingAddresses(query: ForwardingAddressListQuery) -> Observable<ForwardingAddressListResponse> {
         return execute(query: query)
     }
 
