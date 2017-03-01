@@ -106,6 +106,18 @@ class RxGmail {
     typealias SettingsVacationQuery = GTLRGmailQuery_UsersSettingsGetVacation
     typealias SettingsVacationUpdateQuery = GTLRGmailQuery_UsersSettingsUpdateVacation
     typealias SettingsVacation = GTLRGmail_VacationSettings
+    typealias FilterCreateQuery = GTLRGmailQuery_UsersSettingsFiltersCreate
+    typealias Filter = GTLRGmail_Filter
+    typealias FilterGetQuery = GTLRGmailQuery_UsersSettingsFiltersGet
+    typealias FilterDeleteQuery = GTLRGmailQuery_UsersSettingsFiltersDelete
+    typealias FilterListQuery = GTLRGmailQuery_UsersSettingsFiltersList
+    typealias FilterListResponse = GTLRGmail_ListFiltersResponse
+    typealias ForwardingAddress = GTLRGmail_ForwardingAddress
+    typealias ForwardingAddressGetQuery = GTLRGmailQuery_UsersSettingsForwardingAddressesGet
+    typealias ForwardingAddressDeleteQuery = GTLRGmailQuery_UsersSettingsForwardingAddressesDelete
+    typealias ForwardingAddressCreateQuery = GTLRGmailQuery_UsersSettingsForwardingAddressesCreate
+    typealias ForwardingAddressesListQuery = GTLRGmailQuery_UsersSettingsForwardingAddressesList
+    typealias ForwardingAddressesListResponse = GTLRGmail_ListForwardingAddressesResponse
 
     typealias ThreadListQuery = GTLRGmailQuery_UsersThreadsList
     typealias ThreadListResponse = GTLRGmail_ListThreadsResponse
@@ -516,6 +528,82 @@ class RxGmail {
     }
 
     func updateVacation(query: SettingsVacationUpdateQuery) -> Observable<SettingsVacation> {
+        return execute(query: query)
+    }
+
+    // MARK: - Filters
+
+    func createFilter(filter: Filter, forUserId userId: String = "me") -> Observable<Filter> {
+        let query = FilterCreateQuery.query(withObject: filter, userId: userId)
+        return createFilter(query: query)
+    }
+
+    func createFilter(query: FilterCreateQuery) -> Observable<Filter> {
+        return execute(query: query)
+    }
+
+    func getFilter(filterId: String, forUserId userId: String = "me") -> Observable<Filter> {
+        let query = FilterGetQuery.query(withUserId: userId, identifier: filterId)
+        return getFilter(query: query)
+    }
+
+    func getFilter(query: FilterGetQuery) -> Observable<Filter> {
+        return execute(query: query)
+    }
+
+    func deleteFilter(filterId: String, forUserId userId: String = "me") -> Observable<Void> {
+        let query = FilterDeleteQuery.query(withUserId: userId, identifier: filterId)
+        return deleteFilter(query: query)
+    }
+
+    func deleteFilter(query: FilterDeleteQuery) -> Observable<Void> {
+        return execute(query: query)
+    }
+
+    func listFilters(forUserId userId: String = "me") -> Observable<FilterListResponse> {
+        let query = FilterListQuery.query(withUserId: userId)
+        return listFilters(query: query)
+    }
+
+    func listFilters(query: FilterListQuery) -> Observable<FilterListResponse> {
+        return execute(query: query)
+    }
+
+    // MARK: - Forward addresses
+
+    func listForwardingAddresses(forUserId userId: String = "me") -> Observable<ForwardingAddressesListResponse> {
+        let query = ForwardingAddressesListQuery.query(withUserId: userId)
+        return listForwardingAddresses(query: query)
+    }
+
+    func listForwardingAddresses(query: ForwardingAddressesListQuery) -> Observable<ForwardingAddressesListResponse> {
+        return execute(query: query)
+    }
+
+    func getForwardingAddress(forwardingEmail: String, forUserId userId: String = "me") -> Observable<ForwardingAddress> {
+        let query = ForwardingAddressGetQuery.query(withUserId: userId, forwardingEmail: forwardingEmail)
+        return getForwardingAddress(query: query)
+    }
+
+    func getForwardingAddress(query: ForwardingAddressGetQuery) -> Observable<ForwardingAddress> {
+        return execute(query: query)
+    }
+
+    func createForwardingAddress(forwardingAddress: ForwardingAddress, forUserId userId: String = "me") -> Observable<ForwardingAddress> {
+        let query = ForwardingAddressCreateQuery.query(withObject: forwardingAddress, userId: userId)
+        return createForwardingAddress(query: query)
+    }
+
+    func createForwardingAddress(query: ForwardingAddressCreateQuery) -> Observable<ForwardingAddress> {
+        return execute(query: query)
+    }
+
+    func deleteForwardingAddress(forwardingEmail: String, forUserId userId: String = "me") -> Observable<Void> {
+        let query = ForwardingAddressDeleteQuery.query(withUserId: userId, forwardingEmail: forwardingEmail)
+        return deleteForwardingAddress(query: query)
+    }
+
+    func deleteForwardingAddress(query: ForwardingAddressDeleteQuery) -> Observable<Void> {
         return execute(query: query)
     }
 }
