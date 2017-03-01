@@ -90,6 +90,22 @@ class RxGmail {
     typealias DraftsUpdateQuery = GTLRGmailQuery_UsersDraftsUpdate
     typealias HistoryQuery = GTLRGmailQuery_UsersHistoryList
     typealias HistoryResponse = GTLRGmail_ListHistoryResponse
+    typealias AttachmentQuery = GTLRGmailQuery_UsersMessagesAttachmentsGet
+    typealias MessagePartBody = GTLRGmail_MessagePartBody
+    typealias MessagePart = GTLRGmail_MessagePart
+    typealias MessagePartHeader = GTLRGmail_MessagePartHeader
+    typealias SettingsAutoForwardingQuery = GTLRGmailQuery_UsersSettingsGetAutoForwarding
+    typealias SettingsAutoForwarding = GTLRGmail_AutoForwarding
+    typealias SettingsAutoForwardingUpdateQuery = GTLRGmailQuery_UsersSettingsUpdateAutoForwarding
+    typealias SettingsImapQuery = GTLRGmailQuery_UsersSettingsGetImap
+    typealias SettingsImapUpdateQuery = GTLRGmailQuery_UsersSettingsUpdateImap
+    typealias SettingsImap = GTLRGmail_ImapSettings
+    typealias SettingsPopQuery = GTLRGmailQuery_UsersSettingsGetPop
+    typealias SettingsPopUpdateQuery = GTLRGmailQuery_UsersSettingsUpdatePop
+    typealias SettingsPop = GTLRGmail_PopSettings
+    typealias SettingsVacationQuery = GTLRGmailQuery_UsersSettingsGetVacation
+    typealias SettingsVacationUpdateQuery = GTLRGmailQuery_UsersSettingsUpdateVacation
+    typealias SettingsVacation = GTLRGmail_VacationSettings
 
     typealias ThreadListQuery = GTLRGmailQuery_UsersThreadsList
     typealias ThreadListResponse = GTLRGmail_ListThreadsResponse
@@ -417,6 +433,89 @@ class RxGmail {
     }
 
     func untrashMessage(query: MessageUntrashQuery) -> Observable<Message> {
+        return execute(query: query)
+    }
+
+    // MARK: - Attachments
+    func getAttachments(messageId: String, attachmentId: String, forUserId userId: String = "me") ->  Observable<MessagePartBody> {
+        let query = AttachmentQuery.query(withUserId: userId, messageId: messageId, identifier: attachmentId)
+        return getAttachments(query: query)
+    }
+
+    func getAttachments(query: AttachmentQuery) -> Observable<MessagePartBody> {
+        return execute(query: query)
+    }
+
+    // Mark: - Settings
+    func getAutoForwarding(forUserId userId: String = "me") -> Observable<SettingsAutoForwarding> {
+        let query = SettingsAutoForwardingQuery.query(withUserId: userId)
+        return getAutoForwarding(query: query)
+    }
+
+    func getAutoForwarding(query: SettingsAutoForwardingQuery) -> Observable<SettingsAutoForwarding> {
+        return execute(query: query)
+    }
+
+    func updateAutoForwarding(forwardingSettings: SettingsAutoForwarding, forUserId userId: String = "me") -> Observable<SettingsAutoForwarding> {
+        let query = SettingsAutoForwardingUpdateQuery.query(withObject: forwardingSettings, userId: userId)
+        return updateAutoForwarding(query: query)
+    }
+
+    func updateAutoForwarding(query: SettingsAutoForwardingUpdateQuery) -> Observable<SettingsAutoForwarding> {
+        return execute(query: query)
+    }
+
+    func getImap(forUserId userId: String = "me") -> Observable<SettingsImap> {
+        let query = SettingsImapQuery.query(withUserId: userId)
+        return getImap(query: query)
+    }
+
+    func getImap(query: SettingsImapQuery) -> Observable<SettingsImap> {
+        return execute(query: query)
+    }
+
+    func updateImap(imapSettings: SettingsImap, forUserId userId: String = "me") -> Observable<SettingsImap> {
+        let query = SettingsImapUpdateQuery.query(withObject: imapSettings, userId: userId)
+        return updateImap(query: query)
+    }
+
+    func updateImap(query: SettingsImapUpdateQuery) -> Observable<SettingsImap> {
+        return execute(query: query)
+    }
+
+    func getPop(forUserId userId: String = "me") -> Observable<SettingsPop> {
+        let query = SettingsPopQuery.query(withUserId: userId)
+        return getPop(query: query)
+    }
+
+    func getPop(query: SettingsPopQuery) -> Observable<SettingsPop> {
+        return execute(query: query)
+    }
+
+    func updatePop(popSettings: SettingsPop, forUserId userId: String = "me") -> Observable<SettingsPop> {
+        let query = SettingsPopUpdateQuery.query(withObject: popSettings, userId: userId)
+        return updatePop(query: query)
+    }
+
+    func updatePop(query: SettingsPopUpdateQuery) -> Observable<SettingsPop> {
+        return execute(query: query)
+    }
+
+    func getVacation(forUserId userId: String = "me") -> Observable<SettingsVacation> {
+        let query = SettingsVacationQuery.query(withUserId: userId)
+        return getVacation(query: query)
+    }
+
+    func getVacation(query: SettingsVacationQuery) -> Observable<SettingsVacation> {
+        return execute(query: query)
+    }
+
+    func updateVacation(vacationSettings: SettingsVacation, forUserId userId: String = "me") -> Observable<SettingsVacation> {
+        let query = SettingsVacationUpdateQuery.query(withObject: vacationSettings, userId: userId)
+        return updateVacation(query: query)
+    }
+
+    func updateVacation(query: SettingsVacationUpdateQuery) -> Observable<SettingsVacation> {
         return execute(query: query)
     }
 }
