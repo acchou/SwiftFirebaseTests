@@ -63,11 +63,12 @@ class ViewModel: ViewModelType {
         let gmailStatus = input.authEvents
             .filter { $0.isFirebaseSignIn }
             .flatMapLatest { _ in
-                global.rxGmail.getLabels()
+                global.rxGmail.listLabels()
             }
             .map {
-                $0.map { "\($0.name):\($0.messagesUnread)/\($0.messagesTotal)" }.joined(separator: " ")
+                $0.labels?.map { "\($0.name):\($0.messagesUnread)/\($0.messagesTotal)" }.joined(separator: " ")
             }
+            .unwrap()
 
         let status = Observable.of(eventStatus, gmailStatus)
             .merge()
