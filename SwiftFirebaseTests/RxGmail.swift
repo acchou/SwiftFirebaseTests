@@ -118,6 +118,15 @@ class RxGmail {
     typealias ForwardingAddressCreateQuery = GTLRGmailQuery_UsersSettingsForwardingAddressesCreate
     typealias ForwardingAddressesListQuery = GTLRGmailQuery_UsersSettingsForwardingAddressesList
     typealias ForwardingAddressesListResponse = GTLRGmail_ListForwardingAddressesResponse
+    typealias SendAsAlias = GTLRGmail_SendAs
+    typealias SendAsListResponse = GTLRGmail_ListSendAsResponse
+    typealias SendAsGetQuery = GTLRGmailQuery_UsersSettingsSendAsGet
+    typealias SendAsListQuery = GTLRGmailQuery_UsersSettingsSendAsList
+    typealias SendAsPatchQuery = GTLRGmailQuery_UsersSettingsSendAsPatch
+    typealias SendAsCreateQuery = GTLRGmailQuery_UsersSettingsSendAsCreate
+    typealias SendAsDeleteQuery = GTLRGmailQuery_UsersSettingsSendAsDelete
+    typealias SendAsUpdateQuery = GTLRGmailQuery_UsersSettingsSendAsUpdate
+    typealias SendAsVerifyQuery = GTLRGmailQuery_UsersSettingsSendAsVerify
 
     typealias ThreadListQuery = GTLRGmailQuery_UsersThreadsList
     typealias ThreadListResponse = GTLRGmail_ListThreadsResponse
@@ -604,6 +613,71 @@ class RxGmail {
     }
 
     func deleteForwardingAddress(query: ForwardingAddressDeleteQuery) -> Observable<Void> {
+        return execute(query: query)
+    }
+
+    // MARK: Send As Aliases
+
+    func createSendAsAlias(sendAsAlias: SendAsAlias, forUserId userId: String = "me") -> Observable<SendAsAlias> {
+        let query = SendAsCreateQuery.query(withObject: sendAsAlias, userId: userId)
+        return createSendAsAlias(query: query)
+    }
+
+    func createSendAsAlias(query: SendAsCreateQuery) -> Observable<SendAsAlias> {
+        return execute(query: query)
+    }
+
+    func getSendAsAlias(sendAsEmail: String, forUserId userId: String = "me") -> Observable<SendAsAlias> {
+        let query = SendAsGetQuery.query(withUserId: userId, sendAsEmail: sendAsEmail)
+        return getSendAsAlias(query: query)
+    }
+
+    func getSendAsAlias(query: SendAsGetQuery) -> Observable<SendAsAlias> {
+        return execute(query: query)
+    }
+
+    func listSendAsAliases(forUserId userId: String = "me") -> Observable<SendAsListResponse> {
+        let query = SendAsListQuery.query(withUserId: userId)
+        return listSendAsAliases(query: query)
+    }
+
+    func listSendAsAliases(query: SendAsListQuery) -> Observable<SendAsListResponse> {
+        return execute(query: query)
+    }
+
+    func patchSendAsAlias(sendAsAlias: SendAsAlias, sendAsEmail: String, forUserId userId: String = "me") -> Observable<SendAsAlias> {
+        let query = SendAsPatchQuery.query(withObject: sendAsAlias, userId: userId, sendAsEmail: sendAsEmail)
+        return patchSendAsAlias(query: query)
+    }
+
+    func patchSendAsAlias(query: SendAsPatchQuery) -> Observable<SendAsAlias> {
+        return execute(query: query)
+    }
+
+    func deleteSendAsAlias(sendAsEmail: String, forUserId userId: String = "me") -> Observable<Void> {
+        let query = SendAsDeleteQuery.query(withUserId: userId, sendAsEmail: sendAsEmail)
+        return deleteSendAsAlias(query: query)
+    }
+
+    func deleteSendAsAlias(query: SendAsDeleteQuery) -> Observable<Void> {
+        return execute(query: query)
+    }
+
+    func updateSendAsAlias(sendAsAlias: SendAsAlias, sendAsEmail: String, forUserId userId: String = "me") -> Observable<SendAsAlias> {
+        let query = SendAsUpdateQuery.query(withObject: sendAsAlias, userId: userId, sendAsEmail: sendAsEmail)
+        return updateSendAsAlias(query: query)
+    }
+
+    func updateSendAsAlias(query: SendAsUpdateQuery) -> Observable<SendAsAlias> {
+        return execute(query: query)
+    }
+
+    func verifySendAsAlias(sendAsEmail: String, forUserId userId: String = "me") -> Observable<Void> {
+        let query = SendAsVerifyQuery.query(withUserId: userId, sendAsEmail: sendAsEmail)
+        return verifySendAsAlias(query: query)
+    }
+
+    func verifySendAsAlias(query: SendAsVerifyQuery) -> Observable<Void> {
         return execute(query: query)
     }
 }
