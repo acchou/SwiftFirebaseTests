@@ -130,6 +130,13 @@ class RxGmail {
 
     typealias ThreadListQuery = GTLRGmailQuery_UsersThreadsList
     typealias ThreadListResponse = GTLRGmail_ListThreadsResponse
+    typealias Thread = GTLRGmail_Thread
+    typealias ThreadModifyRequest = GTLRGmail_ModifyThreadRequest
+    typealias ThreadGetQuery = GTLRGmailQuery_UsersThreadsGet
+    typealias ThreadTrashQuery = GTLRGmailQuery_UsersThreadsTrash
+    typealias ThreadDeleteQuery = GTLRGmailQuery_UsersThreadsDelete
+    typealias ThreadModifyQuery = GTLRGmailQuery_UsersThreadsModify
+    typealias ThreadUntrashQuery = GTLRGmailQuery_UsersThreadsUntrash
 
     // MARK: - Generic request helper functions
     fileprivate func createRequest(observer: AnyObserver<Any?>, query: Query) -> ServiceTicket {
@@ -680,4 +687,27 @@ class RxGmail {
     func verifySendAsAlias(query: SendAsVerifyQuery) -> Observable<Void> {
         return execute(query: query)
     }
+
+    func listThreads(forUserId userId: String = "me") -> Observable<ThreadListResponse> {
+        let query = ThreadListQuery.query(withUserId: userId)
+        return listThreads(query: query)
+    }
+
+    func listThreads(query: ThreadListQuery) -> Observable<ThreadListResponse> {
+        return executePaged(query: query)
+    }
+
+    func getThread(threadId: String, forUserId userId: String = "me") -> Observable<Thread> {
+        let query = ThreadGetQuery.query(withUserId: userId, identifier: threadId)
+        return getThread(query: query)
+    }
+
+    func getThread(query: ThreadGetQuery) -> Observable<Thread> {
+        return execute(query: query)
+    }
+
+    ThreadTrashQuery
+    ThreadDeleteQuery
+    ThreadModifyQuery
+    ThreadUntrashQuery
 }
