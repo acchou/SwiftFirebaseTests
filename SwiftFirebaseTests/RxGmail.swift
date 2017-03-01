@@ -59,6 +59,19 @@ class RxGmail {
     typealias LabelsUpdateQuery = GTLRGmailQuery_UsersLabelsUpdate
     typealias MessageListQuery = GTLRGmailQuery_UsersMessagesList
     typealias MessageListResponse = GTLRGmail_ListMessagesResponse
+    typealias MessageBatchDeleteQuery = GTLRGmailQuery_UsersMessagesBatchDelete
+    typealias MessageBatchDeleteRequest = GTLRGmail_BatchDeleteMessagesRequest
+    typealias MessageBatchModifyQuery = GTLRGmailQuery_UsersMessagesBatchModify
+    typealias MessageBatchModifyRequest = GTLRGmail_BatchModifyMessagesRequest
+    typealias MessageDeleteQuery = GTLRGmailQuery_UsersMessagesDelete
+    typealias MessageGetQuery = GTLRGmailQuery_UsersMessagesGet
+    typealias MessageImportQuery = GTLRGmailQuery_UsersMessagesImport
+    typealias MessageInsertQuery = GTLRGmailQuery_UsersMessagesInsert
+    typealias MessageModifyQuery = GTLRGmailQuery_UsersMessagesModify
+    typealias MessageModifyRequest = GTLRGmail_ModifyMessageRequest
+    typealias MessageSendQuery = GTLRGmailQuery_UsersMessagesSend
+    typealias MessageTrashQuery = GTLRGmailQuery_UsersMessagesTrash
+    typealias MessageUntrashQuery = GTLRGmailQuery_UsersMessagesUntrash
     typealias ServiceTicket = GTLRServiceTicket
     typealias ProfileQuery = GTLRGmailQuery_UsersGetProfile
     typealias Profile = GTLRGmail_Profile
@@ -121,6 +134,11 @@ class RxGmail {
         return execute(query: query).map { $0! }
     }
 
+    func execute(query: Query) -> Observable<Void> {
+        let response: Observable<Response?> = execute(query: query)
+        return response.map { _ in () }
+    }
+
     /**
      Execute a query returning a paged response.
 
@@ -144,18 +162,6 @@ class RxGmail {
                 }
             }
             return getRemainingPages(after: nil)
-    }
-
-    // MARK: - Messages
-
-    // Each event returns a page of messages.
-    func getMessages(forUserId userId: String = "me") -> Observable<MessageListResponse> {
-        let query = MessageListQuery.query(withUserId: userId)
-        return getMessages(query: query)
-    }
-
-    func getMessages(query: MessageListQuery) -> Observable<MessageListResponse> {
-        return executePaged(query: query)
     }
 
     // MARK: - Users
@@ -184,13 +190,12 @@ class RxGmail {
     }
 
     func stopNotifications(query: StopQuery) -> Observable<Void> {
-        let response: Observable<Response?> = execute(query: query)
-        return response.map { _ in () }
+        return execute(query: query)
     }
 
     // MARK: - Drafts
 
-    func createDraft(draft: Draft, uploadParameters: UploadParameters?,forUserId userId: String = "me") -> Observable<Draft> {
+    func createDraft(draft: Draft, uploadParameters: UploadParameters? = nil, forUserId userId: String = "me") -> Observable<Draft> {
         let query = DraftsCreateQuery.query(withObject: draft, userId: userId, uploadParameters: uploadParameters)
         return createDraft(query: query)
     }
@@ -205,8 +210,7 @@ class RxGmail {
     }
 
     func deleteDraft(query: DraftsDeleteQuery) -> Observable<Void> {
-        let response: Observable<Response?> = execute(query: query)
-        return response.map { _ in () }
+        return execute(query: query)
     }
 
     func getDraft(draftID: String, format: String? = nil, forUserId userId: String = "me") -> Observable<Draft> {
@@ -228,7 +232,7 @@ class RxGmail {
         return executePaged(query: query)
     }
 
-    func sendDraft(draft: Draft, uploadParameters: UploadParameters?, forUserId userId: String = "me") -> Observable<Message> {
+    func sendDraft(draft: Draft, uploadParameters: UploadParameters? = nil, forUserId userId: String = "me") -> Observable<Message> {
         let query = DraftsSendQuery.query(withObject: draft, userId: userId, uploadParameters: uploadParameters)
         return sendDraft(query: query)
     }
@@ -237,7 +241,7 @@ class RxGmail {
         return execute(query: query)
     }
 
-    func updateDraft(draftID: String, draft: Draft, uploadParameters: UploadParameters?, forUserId userId: String = "me") -> Observable<Draft> {
+    func updateDraft(draftID: String, draft: Draft, uploadParameters: UploadParameters? = nil, forUserId userId: String = "me") -> Observable<Draft> {
         let query = DraftsUpdateQuery.query(withObject: draft, userId: userId, identifier: draftID, uploadParameters: uploadParameters)
         return updateDraft(query: query)
     }
@@ -284,8 +288,7 @@ class RxGmail {
     }
 
     func deleteLabel(query: LabelsDeleteQuery) -> Observable<Void> {
-        let response: Observable<Response?> = execute(query: query)
-        return response.map { _ in () }
+        return execute(query: query)
     }
 
     func getLabel(labelId: String, forUserId userId: String = "me") -> Observable<Label> {
@@ -312,6 +315,108 @@ class RxGmail {
     }
 
     func updateLabel(query: LabelsUpdateQuery) -> Observable<Label> {
+        return execute(query: query)
+    }
+
+    // MARK: - Messages
+
+    // Each event returns a page of messages.
+    func listMessages(forUserId userId: String = "me") -> Observable<MessageListResponse> {
+        let query = MessageListQuery.query(withUserId: userId)
+        return listMessages(query: query)
+    }
+
+    func listMessages(query: MessageListQuery) -> Observable<MessageListResponse> {
+        return executePaged(query: query)
+    }
+
+    func batchDeleteMessages(request: MessageBatchDeleteRequest, forUserId userId: String = "me") -> Observable<Void> {
+        let query = MessageBatchDeleteQuery.query(withObject: request, userId: userId)
+        return batchDeleteMessages(query: query)
+    }
+
+    func batchDeleteMessages(query: MessageBatchDeleteQuery) -> Observable<Void> {
+        return execute(query: query)
+    }
+
+    func batchModifyMessages(request: MessageBatchModifyRequest, forUserId userId: String = "me") -> Observable<Void> {
+        let query = MessageBatchModifyQuery.query(withObject: request, userId: userId)
+        return batchModifyMessages(query: query)
+    }
+
+    func batchModifyMessages(query: MessageBatchModifyQuery) -> Observable<Void> {
+        return execute(query: query)
+    }
+
+    func deleteMessage(messageId: String, forUserId userId: String = "me") -> Observable<Void> {
+        let query = MessageDeleteQuery.query(withUserId: userId, identifier: messageId)
+        return deleteMessage(query: query)
+    }
+
+    func deleteMessage(query: MessageDeleteQuery) -> Observable<Void> {
+        return execute(query: query)
+    }
+
+    func getMessage(messageId: String, forUserId userId: String = "me") -> Observable<Message> {
+        let query = MessageGetQuery.query(withUserId: userId, identifier: messageId)
+        return getMessage(query: query)
+    }
+
+    func getMessage(query: MessageGetQuery) -> Observable<Message> {
+        return execute(query: query)
+    }
+
+    func importMessage(message: Message, uploadParameters: UploadParameters? = nil, forUserId userId: String = "me") -> Observable<Message> {
+        let query = MessageImportQuery.query(withObject: message, userId: userId, uploadParameters: uploadParameters)
+        return importMessage(query: query)
+    }
+
+    func importMessage(query: MessageImportQuery) -> Observable<Message> {
+        return execute(query: query)
+    }
+
+    func insertMessage(message: Message, uploadParameters: UploadParameters? = nil, forUserId userId: String = "me") -> Observable<Message> {
+        let query = MessageInsertQuery.query(withObject: message, userId: userId, uploadParameters: uploadParameters)
+        return insertMessage(query: query)
+    }
+
+    func insertMessage(query: MessageInsertQuery) -> Observable<Message> {
+        return execute(query: query)
+    }
+
+    func modifyMessage(messageId: String, request: MessageModifyRequest, forUserId userId: String = "me") -> Observable<Message> {
+        let query = MessageModifyQuery.query(withObject: request, userId: userId, identifier: messageId)
+        return modifyMessage(query: query)
+    }
+
+    func modifyMessage(query: MessageModifyQuery) -> Observable<Message> {
+        return execute(query: query)
+    }
+
+    func sendMessage(message: Message, uploadParameters: UploadParameters? = nil, forUserId userId: String = "me") -> Observable<Message> {
+        let query = MessageSendQuery.query(withObject: message, userId: userId, uploadParameters: uploadParameters)
+        return sendMessage(query: query)
+    }
+
+    func sendMessage(query: MessageSendQuery) -> Observable<Message> {
+        return execute(query: query)
+    }
+
+    func trashMessage(messageId: String, forUserId userId: String = "me") -> Observable<Message> {
+        let query = MessageTrashQuery.query(withUserId: userId, identifier: messageId)
+        return trashMessage(query: query)
+    }
+
+    func trashMessage(query: MessageTrashQuery) -> Observable<Message> {
+        return execute(query: query)
+    }
+
+    func untrashMessage(messageId: String, forUserId userId: String = "me") -> Observable<Message> {
+        let query = MessageUntrashQuery.query(withUserId: userId, identifier: messageId)
+        return untrashMessage(query: query)
+    }
+
+    func untrashMessage(query: MessageUntrashQuery) -> Observable<Message> {
         return execute(query: query)
     }
 }
