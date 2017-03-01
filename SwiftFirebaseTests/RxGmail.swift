@@ -706,8 +706,39 @@ class RxGmail {
         return execute(query: query)
     }
 
-    ThreadTrashQuery
-    ThreadDeleteQuery
-    ThreadModifyQuery
-    ThreadUntrashQuery
+    func trashThread(threadId: String, forUserId userId: String = "me") -> Observable<Thread> {
+        let query = ThreadTrashQuery.query(withUserId: userId, identifier: threadId)
+        return trashThread(query: query)
+    }
+
+    func trashThread(query: ThreadTrashQuery) -> Observable<Thread> {
+        return execute(query: query)
+    }
+
+    func deleteThread(threadId: String, forUserId userId: String = "me") -> Observable<Void> {
+        let query = ThreadDeleteQuery.query(withUserId: userId, identifier: threadId)
+        return deleteThread(query: query)
+    }
+
+    func deleteThread(query: ThreadDeleteQuery) -> Observable<Void> {
+        return execute(query: query)
+    }
+
+    func modifyThread(modifyThreadRequest: ThreadModifyRequest, threadId: String, forUserId userId: String = "me") -> Observable<Thread> {
+        let query = ThreadModifyQuery.query(withObject: modifyThreadRequest, userId: userId, identifier: threadId)
+        return modifyThread(query: query)
+    }
+
+    func modifyThread(query: ThreadModifyQuery) -> Observable<Thread> {
+        return execute(query: query)
+    }
+
+    func untrashThread(threadId: String, forUserId userId: String = "me") -> Observable<Thread> {
+        let query = ThreadUntrashQuery.query(withUserId: userId, identifier: threadId)
+        return untrashThread(query: query)
+    }
+
+    func untrashThread(query: ThreadUntrashQuery) -> Observable<Thread> {
+        return execute(query: query)
+    }
 }
